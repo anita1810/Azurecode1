@@ -1,5 +1,5 @@
 {
-	"name": "ds_emp_file2",
+	"name": "ds_emp1_file",
 	"properties": {
 		"description": "This file doesn't exist. It has been created to check GMD exits property",
 		"linkedServiceName": {
