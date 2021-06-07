@@ -60,7 +60,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_emp_file2",
+						"referenceName": "ds_emp1_file",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -96,7 +96,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_emp_file2",
+						"referenceName": "ds_emp1_file",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
