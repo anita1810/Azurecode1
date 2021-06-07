@@ -38,7 +38,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['author']"
+									"path": "['author']"
 								},
 								"sink": {
 									"name": "author",
@@ -47,7 +47,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['title']"
+									"path": "['title']"
 								},
 								"sink": {
 									"name": "title",
@@ -56,7 +56,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['genre']"
+									"path": "['genre']"
 								},
 								"sink": {
 									"name": "genre",
@@ -65,7 +65,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['price']"
+									"path": "['price']"
 								},
 								"sink": {
 									"name": "price",
@@ -74,7 +74,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['publish_date']"
+									"path": "['publish_date']"
 								},
 								"sink": {
 									"name": "publish_date",
@@ -83,7 +83,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['description']"
+									"path": "['description']"
 								},
 								"sink": {
 									"name": "description",
@@ -92,7 +92,7 @@
 							},
 							{
 								"source": {
-									"path": "$['catalog']['book'][0]['@id']"
+									"path": "['@id']"
 								},
 								"sink": {
 									"name": "id",
@@ -100,7 +100,7 @@
 								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "$['catalog']['book']"
 					}
 				},
 				"inputs": [
