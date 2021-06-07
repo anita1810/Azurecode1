@@ -1,6 +1,7 @@
 {
-	"name": "0706_GetMetadata_file",
+	"name": "0706_GetMetadata_file_exist",
 	"properties": {
+		"description": "Checking how exist work if file exists or not. GMD returns false if we select exits and file doesn't exist. BUT GMD gets failed if we try to fetch other property and file doesn't exist.",
 		"activities": [
 			{
 				"name": "Get Metadata1",
