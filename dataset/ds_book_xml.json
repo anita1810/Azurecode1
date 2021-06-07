@@ -1,0 +1,19 @@
+{
+	"name": "ds_book_xml",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "book.xml",
+				"folderPath": "Input",
+				"container": "anucontainer"
+			}
+		}
+	}
+}
