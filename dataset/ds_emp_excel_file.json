@@ -5,10 +5,18 @@
 			"referenceName": "ls_blob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"SheetName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "IT",
+			"sheetName": {
+				"value": "@dataset().SheetName",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Emp.xlsx",

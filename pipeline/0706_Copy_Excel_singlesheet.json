@@ -91,7 +91,10 @@
 				"inputs": [
 					{
 						"referenceName": "ds_emp_excel_file",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SheetName": "IT"
+						}
 					}
 				],
 				"outputs": [
