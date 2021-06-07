@@ -1,6 +1,7 @@
 {
 	"name": "ds_emp_file2",
 	"properties": {
+		"description": "This file doesn't exist. It has been created to check GMD exits property",
 		"linkedServiceName": {
 			"referenceName": "ls_blob",
 			"type": "LinkedServiceReference"
