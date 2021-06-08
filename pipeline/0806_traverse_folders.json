@@ -103,26 +103,6 @@
 														"type": "DelimitedTextReadSettings"
 													}
 												}
-											},
-											{
-												"name": "Set variable1",
-												"type": "SetVariable",
-												"dependsOn": [
-													{
-														"activity": "Get Metadata1",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"variableName": "Queue",
-													"value": {
-														"value": "@activity('Get Metadata1').output.ChildItems",
-														"type": "Expression"
-													}
-												}
 											}
 										]
 									},
