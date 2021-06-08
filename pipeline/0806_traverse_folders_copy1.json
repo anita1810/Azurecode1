@@ -1,0 +1,434 @@
+{
+	"name": "0806_traverse_folders_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set queue",
+				"description": "a",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Queue",
+					"value": [
+						{
+							"name": "/anucontainer",
+							"type": "Path"
+						}
+					]
+				}
+			},
+			{
+				"name": "Until queue is empty",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Set variable10",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@empty(variables('Queue'))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@variables('Queue')[0].type",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "Path",
+										"activities": [
+											{
+												"name": "SetCurrentPath",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "CurrentPath",
+													"value": {
+														"value": "@variables('Queue')[0].name",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Get Metadata1",
+												"type": "GetMetadata",
+												"dependsOn": [
+													{
+														"activity": "SetCurrentPath",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_Dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"Container": {
+																"value": "@variables('CurrentPath')",
+																"type": "Expression"
+															}
+														}
+													},
+													"fieldList": [
+														"childItems"
+													],
+													"storeSettings": {
+														"type": "AzureBlobStorageReadSettings",
+														"recursive": true,
+														"enablePartitionDiscovery": false
+													},
+													"formatSettings": {
+														"type": "DelimitedTextReadSettings"
+													}
+												}
+											},
+											{
+												"name": "Inerting childitems into tmpqueue",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Get Metadata1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "tmpQueue",
+													"value": {
+														"value": "@union(variables('Queue'),activity('Get Metadata1').output.ChildItems)",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Inerting childitems into Queue",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Inerting childitems into tmpqueue",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "Queue",
+													"value": {
+														"value": "@variables('tmpQueue')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "File",
+										"activities": [
+											{
+												"name": "Append variable1",
+												"type": "AppendVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "FilePaths",
+													"value": {
+														"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "Folder",
+										"activities": [
+											{
+												"name": "Append variable2",
+												"type": "AppendVariable",
+												"dependsOn": [
+													{
+														"activity": "Set variable6_copy1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "Queue",
+													"value": {
+														"value": "@array(variables('CurrentPath'))",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Set variable6_copy1",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Set variable7_copy1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "CurrentPath",
+													"value": {
+														"value": "@string(json(concat('{\"name\":','\"',variables('tmpCP'),'\"',\n',',\n'\"type\":\"Path\"}')))\n",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Set variable7_copy1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "tmpCP",
+													"value": {
+														"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								]
+							}
+						},
+						{
+							"name": "Removing first element and assigning to tmpqueue",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Switch1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "tmpQueue",
+								"value": {
+									"value": "@skip(variables('Queue'),1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Removing first element and assigning to queue",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Removing first element and assigning to tmpqueue",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Queue",
+								"value": {
+									"value": "@variables('tmpQueue')",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"timeout": "7.00:00:00"
+				}
+			},
+			{
+				"name": "Set variable5",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Until queue is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpQueue",
+					"value": {
+						"value": "@variables('FilePaths')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable6",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable7",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CurrentPath",
+					"value": {
+						"value": "@concat('{\"name\":\"',variables('tmpCP'),'\"',',',\n'\"type\":\"Path\"}')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable7",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set queue",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpCP",
+					"value": {
+						"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable8",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable6",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpCP",
+					"value": {
+						"value": "@variables('CurrentPath')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Append variable3",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable8",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Queue",
+					"value": {
+						"value": "@json(variables('CurrentPath'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable9",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Append variable3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpQueue",
+					"value": {
+						"value": "@variables('Queue')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable10",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable9",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CurrentPath",
+					"value": {
+						"value": "@variables('tmpQueue')[1].type",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Queue": {
+				"type": "Array"
+			},
+			"CurrentPath": {
+				"type": "String"
+			},
+			"FilePaths": {
+				"type": "Array"
+			},
+			"tmpQueue": {
+				"type": "Array"
+			},
+			"tmpCP": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
