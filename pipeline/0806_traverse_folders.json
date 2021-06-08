@@ -23,7 +23,7 @@
 				"type": "Until",
 				"dependsOn": [
 					{
-						"activity": "Set variable8",
+						"activity": "Set queue",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -287,66 +287,6 @@
 					"variableName": "tmpQueue",
 					"value": {
 						"value": "@variables('FilePaths')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable6",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable7",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CurrentPath",
-					"value": {
-						"value": "@string(json(concat('{\"name\":','\"',variables('tmpCP'),'\"',\n',',\n'\"type\":\"Path\"}')))\n",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable7",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set queue",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "tmpCP",
-					"value": {
-						"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable8",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable6",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "tmpCP",
-					"value": {
-						"value": "@variables('CurrentPath')",
 						"type": "Expression"
 					}
 				}
