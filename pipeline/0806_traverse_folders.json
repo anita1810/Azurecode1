@@ -164,6 +164,9 @@
 			},
 			"CurrentPath": {
 				"type": "String"
+			},
+			"FilePaths": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
