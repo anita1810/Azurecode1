@@ -184,6 +184,46 @@
 									}
 								]
 							}
+						},
+						{
+							"name": "Set variable3",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Switch1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "tmpQueue",
+								"value": {
+									"value": "@skip(variables('Queue'),1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable4",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set variable3",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Queue",
+								"value": {
+									"value": "@variables('tmpQueue')",
+									"type": "Expression"
+								}
+							}
 						}
 					],
 					"timeout": "7.00:00:00"
