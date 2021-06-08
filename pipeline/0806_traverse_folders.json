@@ -107,7 +107,7 @@
 												}
 											},
 											{
-												"name": "Set variable6",
+												"name": "Inerting childitems into tmpqueue",
 												"type": "SetVariable",
 												"dependsOn": [
 													{
@@ -127,11 +127,11 @@
 												}
 											},
 											{
-												"name": "Set variable7",
+												"name": "Inerting childitems into Queue",
 												"type": "SetVariable",
 												"dependsOn": [
 													{
-														"activity": "Set variable6",
+														"activity": "Inerting childitems into tmpqueue",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -208,7 +208,7 @@
 							}
 						},
 						{
-							"name": "Set variable3",
+							"name": "Removing first element and assigning to tmpqueue",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
@@ -228,11 +228,11 @@
 							}
 						},
 						{
-							"name": "Set variable4",
+							"name": "Removing first element and assigning to queue",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Set variable3",
+									"activity": "Removing first element and assigning to tmpqueue",
 									"dependencyConditions": [
 										"Succeeded"
 									]
