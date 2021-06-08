@@ -11,7 +11,7 @@
 					"variableName": "Queue",
 					"value": [
 						{
-							"name": "/anucontainer/input",
+							"name": "/anucontainer",
 							"type": "Path"
 						}
 					]
