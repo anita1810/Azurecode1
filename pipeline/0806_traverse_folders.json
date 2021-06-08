@@ -184,7 +184,7 @@
 												"typeProperties": {
 													"variableName": "Queue",
 													"value": {
-														"value": "@array(variables('CurrentPath'))",
+														"value": "@variables('CurrentPath')",
 														"type": "Expression"
 													}
 												}
@@ -278,7 +278,8 @@
 					{
 						"activity": "Until queue is empty",
 						"dependencyConditions": [
-							"Succeeded"
+							"Succeeded",
+							"Failed"
 						]
 					}
 				],
