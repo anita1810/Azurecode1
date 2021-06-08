@@ -204,7 +204,7 @@
 												"typeProperties": {
 													"variableName": "CurrentPath",
 													"value": {
-														"value": "@concat('{\"name\":','\"',variables('tmpCP'),'\"',\n',',\n'\"type\":\"Path\"}')\n",
+														"value": "@concat('\"name:\"',variables('tmpCP'),',','\"type:\"','Path')",
 														"type": "Expression"
 													}
 												}
