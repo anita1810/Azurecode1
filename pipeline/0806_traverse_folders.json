@@ -98,10 +98,31 @@
 													],
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
+														"recursive": true,
 														"enablePartitionDiscovery": false
 													},
 													"formatSettings": {
 														"type": "DelimitedTextReadSettings"
+													}
+												}
+											},
+											{
+												"name": "Append variable3",
+												"type": "AppendVariable",
+												"dependsOn": [
+													{
+														"activity": "Get Metadata1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "Queue",
+													"value": {
+														"value": "@activity('Get Metadata1').output.ChildItems",
+														"type": "Expression"
 													}
 												}
 											}
@@ -118,7 +139,7 @@
 												"typeProperties": {
 													"variableName": "FilePaths",
 													"value": {
-														"value": "@concat(variables('CurrentPath'),'\\',variables('Queue')[0].name)",
+														"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
 														"type": "Expression"
 													}
 												}
