@@ -143,6 +143,44 @@
 												}
 											}
 										]
+									},
+									{
+										"value": "Folder",
+										"activities": [
+											{
+												"name": "Set variable2",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "tmpQueue",
+													"value": {
+														"value": "[{\"name\":\"@concat(variables('CurrentPath'),'\\',variables('Queue')[0].name)\",\"type\":\"Path\"}]",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Append variable2",
+												"type": "AppendVariable",
+												"dependsOn": [
+													{
+														"activity": "Set variable2",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "Queue",
+													"value": {
+														"value": "@variables('tmpQueue')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									}
 								]
 							}
@@ -160,6 +198,9 @@
 				"type": "String"
 			},
 			"FilePaths": {
+				"type": "Array"
+			},
+			"tmpQueue": {
 				"type": "Array"
 			}
 		},
