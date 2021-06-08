@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Set queue",
+				"description": "a",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"userProperties": [],
