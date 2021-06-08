@@ -228,6 +228,26 @@
 					],
 					"timeout": "7.00:00:00"
 				}
+			},
+			{
+				"name": "Set variable5",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Until queue is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpQueue",
+					"value": {
+						"value": "@variables('FilePaths')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
