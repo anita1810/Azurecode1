@@ -146,19 +146,6 @@
 									}
 								]
 							}
-						},
-						{
-							"name": "Set variable2",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Switch1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"userProperties": []
 						}
 					],
 					"timeout": "7.00:00:00"
