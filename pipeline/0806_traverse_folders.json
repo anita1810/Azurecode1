@@ -107,8 +107,8 @@
 												}
 											},
 											{
-												"name": "Append variable3",
-												"type": "AppendVariable",
+												"name": "Set variable6",
+												"type": "SetVariable",
 												"dependsOn": [
 													{
 														"activity": "Get Metadata1",
@@ -119,9 +119,29 @@
 												],
 												"userProperties": [],
 												"typeProperties": {
+													"variableName": "tmpQueue",
+													"value": {
+														"value": "@union(variables('Queue'),activity('Get Metadata1').output.ChildItems)",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Set variable7",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Set variable6",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
 													"variableName": "Queue",
 													"value": {
-														"value": "@activity('Get Metadata1').output.ChildItems",
+														"value": "@variables('tmpQueue')",
 														"type": "Expression"
 													}
 												}
