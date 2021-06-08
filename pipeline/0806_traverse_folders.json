@@ -11,7 +11,7 @@
 					"variableName": "Queue",
 					"value": [
 						{
-							"name": "/anucontainer",
+							"name": "/anucontainer/input",
 							"type": "Path"
 						}
 					]
@@ -130,10 +130,17 @@
 										"value": "File",
 										"activities": [
 											{
-												"name": "Set variable3",
-												"type": "SetVariable",
+												"name": "Append variable1",
+												"type": "AppendVariable",
 												"dependsOn": [],
-												"userProperties": []
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "FilePaths",
+													"value": {
+														"value": "@concat(variables('CurrentPath'),'\\',variables('Queue')[0].name)",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									}
