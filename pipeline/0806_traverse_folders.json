@@ -175,7 +175,7 @@
 												"dependsOn": [],
 												"userProperties": [],
 												"typeProperties": {
-													"variableName": "tmpQueue",
+													"variableName": "CurrentPath",
 													"value": {
 														"value": "[{\"name\":\"@concat(variables('CurrentPath'),'\\',variables('Queue')[0].name)\",\"type\":\"Path\"}]",
 														"type": "Expression"
@@ -197,7 +197,7 @@
 												"typeProperties": {
 													"variableName": "Queue",
 													"value": {
-														"value": "@variables('tmpQueue')",
+														"value": "@variables('CurrentPath')",
 														"type": "Expression"
 													}
 												}
