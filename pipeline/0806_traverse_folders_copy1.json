@@ -23,7 +23,7 @@
 				"type": "Until",
 				"dependsOn": [
 					{
-						"activity": "Set variable10",
+						"activity": "Set queue",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -152,7 +152,7 @@
 										"value": "File",
 										"activities": [
 											{
-												"name": "Append variable1",
+												"name": "Append Final file name",
 												"type": "AppendVariable",
 												"dependsOn": [],
 												"userProperties": [],
@@ -170,11 +170,11 @@
 										"value": "Folder",
 										"activities": [
 											{
-												"name": "Append variable2",
+												"name": "Appending json to queue",
 												"type": "AppendVariable",
 												"dependsOn": [
 													{
-														"activity": "Set variable6_copy1",
+														"activity": "Setting json for folder",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -190,11 +190,11 @@
 												}
 											},
 											{
-												"name": "Set variable6_copy1",
+												"name": "Setting json for folder",
 												"type": "SetVariable",
 												"dependsOn": [
 													{
-														"activity": "Set variable7_copy1",
+														"activity": "Setting current path for folder",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -210,7 +210,7 @@
 												}
 											},
 											{
-												"name": "Set variable7_copy1",
+												"name": "Setting current path for folder",
 												"type": "SetVariable",
 												"dependsOn": [],
 												"userProperties": [],
@@ -272,7 +272,7 @@
 				}
 			},
 			{
-				"name": "Set variable5",
+				"name": "Show file Paths",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
@@ -287,126 +287,6 @@
 					"variableName": "tmpQueue",
 					"value": {
 						"value": "@variables('FilePaths')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable6",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable7",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CurrentPath",
-					"value": {
-						"value": "@concat('{\"name\":\"',variables('tmpCP'),'\"',',',\n'\"type\":\"Path\"}')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable7",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set queue",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "tmpCP",
-					"value": {
-						"value": "@concat(variables('CurrentPath'),'/',variables('Queue')[0].name)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable8",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable6",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "tmpCP",
-					"value": {
-						"value": "@variables('CurrentPath')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Append variable3",
-				"type": "AppendVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable8",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "Queue",
-					"value": {
-						"value": "@json(variables('CurrentPath'))",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable9",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Append variable3",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "tmpQueue",
-					"value": {
-						"value": "@variables('Queue')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable10",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable9",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CurrentPath",
-					"value": {
-						"value": "@variables('tmpQueue')[1].type",
 						"type": "Expression"
 					}
 				}
