@@ -184,7 +184,7 @@
 												"typeProperties": {
 													"variableName": "Queue",
 													"value": {
-														"value": "@array(variables('CurrentPath'))",
+														"value": "@json(variables('CurrentPath'))",
 														"type": "Expression"
 													}
 												}
@@ -204,7 +204,7 @@
 												"typeProperties": {
 													"variableName": "CurrentPath",
 													"value": {
-														"value": "@string(json(concat('{\"name\":','\"',variables('tmpCP'),'\"',\n',',\n'\"type\":\"Path\"}')))\n",
+														"value": "@concat('{\"name\":\"',variables('tmpCP'),'\"',',',\n'\"type\":\"Path\"}')",
 														"type": "Expression"
 													}
 												}
