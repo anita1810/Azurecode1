@@ -94,7 +94,8 @@
 														}
 													},
 													"fieldList": [
-														"childItems"
+														"childItems",
+														"itemName"
 													],
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
@@ -184,7 +185,7 @@
 												"typeProperties": {
 													"variableName": "Queue",
 													"value": {
-														"value": "@json(variables('CurrentPath'))",
+														"value": "@json(variables('tmpCP2'))",
 														"type": "Expression"
 													}
 												}
@@ -202,7 +203,7 @@
 												],
 												"userProperties": [],
 												"typeProperties": {
-													"variableName": "CurrentPath",
+													"variableName": "tmpCP2",
 													"value": {
 														"value": "@concat('{\"name\":\"',variables('tmpCP'),'\"',',',\n'\"type\":\"Path\"}')",
 														"type": "Expression"
@@ -306,6 +307,9 @@
 				"type": "Array"
 			},
 			"tmpCP": {
+				"type": "String"
+			},
+			"tmpCP2": {
 				"type": "String"
 			}
 		},
