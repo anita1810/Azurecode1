@@ -307,10 +307,90 @@
 				"typeProperties": {
 					"variableName": "tmpCP",
 					"value": {
-						"value": "@join(variables('FilePaths'),',')",
+						"value": "@string(variables('FilePaths'))",
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "Filenames",
+								"value": {
+									"value": "@variables('tmpCP')",
+									"type": "Expression"
+								}
+							}
+						],
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Filenames"
+								},
+								"sink": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 1
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_emp_table",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_anucontainer",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"variables": {

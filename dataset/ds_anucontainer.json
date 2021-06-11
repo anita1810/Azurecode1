@@ -1,0 +1,22 @@
+{
+	"name": "ds_anucontainer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Filenames.txt",
+				"container": "anucontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
