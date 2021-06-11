@@ -307,7 +307,7 @@
 				"typeProperties": {
 					"variableName": "tmpCP",
 					"value": {
-						"value": "@string(variables('FilePaths'))",
+						"value": "@json(variables('FilePaths'))",
 						"type": "Expression"
 					}
 				}
