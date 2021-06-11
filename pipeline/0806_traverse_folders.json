@@ -291,6 +291,26 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Show file Paths",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tmpCP",
+					"value": {
+						"value": "@join(variables('FilePaths'),',')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
