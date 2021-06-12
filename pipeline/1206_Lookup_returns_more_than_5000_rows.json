@@ -1,0 +1,134 @@
+{
+	"name": "1206_Lookup_returns_more_than_5000_rows",
+	"properties": {
+		"activities": [
+			{
+				"name": "Getting total row count",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "Select count(1) as rowcnt from dbo.lookup_test",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_book_tbl",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
+			},
+			{
+				"name": "Set Iterations array",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Getting total row count",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Iterations",
+					"value": {
+						"value": "@range(1,add(div(activity('Getting total row count').output.firstRow.rowcnt,5000),1))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Iterating through each iteration",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set Iterations array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('Iterations')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Fetching records",
+							"description": "SELECT\n    id\nFROM\n    dbo.lookup_test\nOFFSET 10 ROWS \nFETCH NEXT 10 ROWS ONLY;",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\nOFFSET ', variables('offset'), '  ROWS')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "ds_book_tbl",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "Set offset",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Fetching records",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "offset",
+								"value": {
+									"value": "@string(mul(5000,item()))",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"Iterations": {
+				"type": "Array"
+			},
+			"offset": {
+				"type": "String",
+				"defaultValue": "0"
+			}
+		},
+		"annotations": []
+	}
+}
