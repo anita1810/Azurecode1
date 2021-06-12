@@ -1,0 +1,45 @@
+{
+	"name": "1206_lkp_returns_more_than_5000_rows_child",
+	"properties": {
+		"activities": [
+			{
+				"name": "Fetching records",
+				"description": "SELECT\n    id\nFROM\n    dbo.lookup_test\nOFFSET 10 ROWS \nFETCH NEXT 10 ROWS ONLY;",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\norder by id\nOFFSET ', pipeline().parameters.Fetch, ' ROWS FETCH NEXT ',\npipeline().parameters.Fetch, ' ROWS ONLY')",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_book_tbl",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Offset": {
+				"type": "string"
+			},
+			"Fetch": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
