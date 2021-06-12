@@ -68,40 +68,11 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Fetching records",
-							"description": "SELECT\n    id\nFROM\n    dbo.lookup_test\nOFFSET 10 ROWS \nFETCH NEXT 10 ROWS ONLY;",
-							"type": "Lookup",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "AzureSqlSource",
-									"sqlReaderQuery": {
-										"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\norder by id\nOFFSET ', variables('offset'), ' ROWS')",
-										"type": "Expression"
-									},
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
-								},
-								"dataset": {
-									"referenceName": "ds_book_tbl",
-									"type": "DatasetReference"
-								}
-							}
-						},
-						{
 							"name": "Set offset",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Fetching records",
+									"activity": "Execute Pipeline1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -113,6 +84,29 @@
 								"value": {
 									"value": "@string(mul(5000,item()))",
 									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "1206_lkp_returns_more_than_5000_rows_child",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"Offset": {
+										"value": "@variables('offset')",
+										"type": "Expression"
+									},
+									"Fetch": {
+										"value": "5000",
+										"type": "Expression"
+									}
 								}
 							}
 						}
