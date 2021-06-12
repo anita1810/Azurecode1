@@ -84,7 +84,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\nOFFSET ', variables('offset'), ' ROWS')",
+										"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\norder by id\nOFFSET ', variables('offset'), ' ROWS')",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
