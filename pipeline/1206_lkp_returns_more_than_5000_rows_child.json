@@ -28,7 +28,8 @@
 					"dataset": {
 						"referenceName": "ds_book_tbl",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
