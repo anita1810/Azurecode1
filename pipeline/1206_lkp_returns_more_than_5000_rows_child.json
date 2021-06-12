@@ -70,7 +70,7 @@
 										{
 											"name": "Value",
 											"value": {
-												"value": "@string(mul(item().id,5))",
+												"value": "@string(mul(int(item().id),5))",
 												"type": "Expression"
 											}
 										}
@@ -87,9 +87,7 @@
 									"mappings": [
 										{
 											"source": {
-												"name": "id",
-												"type": "String",
-												"physicalType": "varchar"
+												"name": "Value"
 											},
 											"sink": {
 												"name": "id",
