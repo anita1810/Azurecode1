@@ -70,7 +70,7 @@
 										{
 											"name": "Value",
 											"value": {
-												"value": "@mul(int(item()),5)",
+												"value": "@string(mul(item().id,5))",
 												"type": "Expression"
 											}
 										}
