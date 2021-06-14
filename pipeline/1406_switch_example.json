@@ -74,10 +74,33 @@
 					"variableName": "Flag",
 					"value": "p"
 				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Switch1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "output",
+					"value": {
+						"value": "@activity('Switch1').output.Expression",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
 			"Flag": {
+				"type": "String"
+			},
+			"output": {
 				"type": "String"
 			}
 		},
