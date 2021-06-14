@@ -10,7 +10,7 @@
 				"typeProperties": {
 					"variableName": "Filestatus",
 					"value": {
-						"value": "false",
+						"value": "@bool(false)",
 						"type": "Expression"
 					}
 				}
