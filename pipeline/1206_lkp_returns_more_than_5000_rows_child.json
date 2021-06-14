@@ -19,7 +19,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\norder by id\nOFFSET ', pipeline().parameters.Fetch, ' ROWS FETCH NEXT ',\npipeline().parameters.Fetch, ' ROWS ONLY')",
+							"value": "@concat('SELECT\n    id\nFROM\n    dbo.lookup_test\norder by id\nOFFSET ', pipeline().parameters.Offset, ' ROWS FETCH NEXT ',\npipeline().parameters.Fetch, ' ROWS ONLY')",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
