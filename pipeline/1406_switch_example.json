@@ -47,6 +47,20 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "z",
+							"activities": [
+								{
+									"name": "Wait z",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 12
+									}
+								}
+							]
 						}
 					]
 				}
@@ -58,7 +72,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "Flag",
-					"value": "y"
+					"value": "p"
 				}
 			}
 		],
