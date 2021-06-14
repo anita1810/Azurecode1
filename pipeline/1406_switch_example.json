@@ -1,0 +1,72 @@
+{
+	"name": "1406_switch_example",
+	"properties": {
+		"activities": [
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@variables('Flag')",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "y",
+							"activities": [
+								{
+									"name": "Wait Y",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 5
+									}
+								}
+							]
+						},
+						{
+							"value": "x",
+							"activities": [
+								{
+									"name": "Wait X",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 10
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Flag",
+					"value": "y"
+				}
+			}
+		],
+		"variables": {
+			"Flag": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
