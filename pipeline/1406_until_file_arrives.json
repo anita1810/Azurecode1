@@ -107,6 +107,22 @@
 					],
 					"timeout": "0.00:03:00"
 				}
+			},
+			{
+				"name": "Wait outside until",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Until1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"variables": {
