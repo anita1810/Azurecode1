@@ -105,7 +105,7 @@
 							}
 						}
 					],
-					"timeout": "0.00:03:00"
+					"timeout": "0.00:02:00"
 				}
 			},
 			{
@@ -123,11 +123,31 @@
 				"typeProperties": {
 					"waitTimeInSeconds": 1
 				}
+			},
+			{
+				"name": "Set variable3",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Until1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Msg",
+					"value": "File doesn't exist"
+				}
 			}
 		],
 		"variables": {
 			"Filestatus": {
 				"type": "Boolean"
+			},
+			"Msg": {
+				"type": "String"
 			}
 		},
 		"annotations": []
