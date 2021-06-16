@@ -9,11 +9,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_Dynamic",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": "\\anucontainer"
-						}
+						"referenceName": "ds_input_folder",
+						"type": "DatasetReference"
 					},
 					"timeout": "7.00:00:00",
 					"sleep": 10
