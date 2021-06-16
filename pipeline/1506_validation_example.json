@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"variableName": "Msg",
 					"value": {
-						"value": "@string(activity('Validation1'))",
+						"value": "@string(activity('Validation1').output)",
 						"type": "Expression"
 					}
 				}
