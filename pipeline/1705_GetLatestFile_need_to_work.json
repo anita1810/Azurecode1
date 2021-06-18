@@ -1,5 +1,5 @@
 {
-	"name": "1705_GetLatestFile",
+	"name": "1705_GetLatestFile_need_to_work",
 	"properties": {
 		"activities": [
 			{
@@ -15,9 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": [
-						"childItems"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": true,
@@ -60,10 +58,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"fieldList": [
-									"itemName",
-									"lastModified"
-								],
+								"fieldList": [],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
@@ -93,7 +88,7 @@
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Set variable1",
+										"name": "Set LatestFile",
 										"type": "SetVariable",
 										"dependsOn": [],
 										"userProperties": [],
@@ -106,11 +101,11 @@
 										}
 									},
 									{
-										"name": "Set variable2",
+										"name": "Set PreviousLastModified",
 										"type": "SetVariable",
 										"dependsOn": [
 											{
-												"activity": "Set variable1",
+												"activity": "Set LatestFile",
 												"dependencyConditions": [
 													"Succeeded"
 												]
