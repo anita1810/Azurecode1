@@ -123,6 +123,9 @@
 				"defaultValue": "0"
 			}
 		},
+		"folder": {
+			"name": "Scenarios"
+		},
 		"annotations": []
 	}
 }

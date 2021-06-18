@@ -104,6 +104,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "activities_example"
+		},
 		"annotations": []
 	}
 }

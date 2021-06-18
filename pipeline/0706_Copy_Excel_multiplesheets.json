@@ -163,6 +163,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Scenarios"
+		},
 		"annotations": []
 	}
 }

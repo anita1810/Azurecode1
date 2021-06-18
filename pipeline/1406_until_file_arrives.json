@@ -55,6 +55,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -149,6 +150,9 @@
 			"Msg": {
 				"type": "String"
 			}
+		},
+		"folder": {
+			"name": "activities_example"
 		},
 		"annotations": []
 	}
