@@ -67,6 +67,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "activities_example"
+		},
 		"annotations": [],
 		"lastPublishTime": "2021-06-15T05:33:58Z"
 	},
