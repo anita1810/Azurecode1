@@ -4,7 +4,7 @@
 		"description": "Deleting files of xlsx type",
 		"activities": [
 			{
-				"name": "Delete1",
+				"name": "Delete xlsx file",
 				"type": "Delete",
 				"dependsOn": [],
 				"policy": {
