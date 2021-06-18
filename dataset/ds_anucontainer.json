@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Filenames.txt",
 				"container": "anucontainer"
 			},
 			"columnDelimiter": ",",
