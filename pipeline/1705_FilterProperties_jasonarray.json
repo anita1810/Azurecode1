@@ -1,0 +1,74 @@
+{
+	"name": "1705_FilterProperties_jasonarray",
+	"properties": {
+		"activities": [
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.Array",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@greater(item().Id,3)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Filter1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Properties",
+					"value": {
+						"value": "@String(activity('Filter1'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Array": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"Id": 1,
+						"name": "Anita"
+					},
+					{
+						"Id": 2,
+						"name": "Isha"
+					},
+					{
+						"Id": 3,
+						"name": "Kimi"
+					},
+					{
+						"Id": 4,
+						"name": "Priya"
+					}
+				]
+			}
+		},
+		"variables": {
+			"Properties": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-06-15T05:33:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
