@@ -1,5 +1,5 @@
 {
-	"name": "1206_Lookup_returns_more_than_5000_rows",
+	"name": "0612_Lookup_returns_more_than_5000_rows",
 	"properties": {
 		"activities": [
 			{
@@ -94,7 +94,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "1206_lkp_returns_more_than_5000_rows_child",
+									"referenceName": "0612_lkp_returns_more_than_5000_rows_child",
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true,
