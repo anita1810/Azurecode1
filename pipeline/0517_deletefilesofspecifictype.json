@@ -1,5 +1,5 @@
 {
-	"name": "1705_deletefilesofspecifictype",
+	"name": "0517_deletefilesofspecifictype",
 	"properties": {
 		"description": "Deleting files of xlsx type",
 		"activities": [
