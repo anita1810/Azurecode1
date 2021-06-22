@@ -1,0 +1,32 @@
+{
+	"name": "0622_DF_DerivedCol",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_customer_file",
+						"type": "DatasetReference"
+					},
+					"name": "Customer"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "ls_sqldb",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedFullName"
+				}
+			],
+			"script": "source(output(\n\t\tId as string,\n\t\tFname as string,\n\t\tlname as string,\n\t\tloc as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'Filename') ~> Customer\nCustomer derive(FullName = concat(Fname, ' ', lname)) ~> DerivedFullName\nDerivedFullName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tstore: 'sqlserver',\n\tschemaName: 'dbo',\n\ttableName: 'Customer',\n\tinsertable: true,\n\tupdateable: false,\n\tdeletable: false,\n\tupsertable: false,\n\trecreate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tId,\n\t\tFname,\n\t\tlname,\n\t\tloc,\n\t\tFilename,\n\t\tFullName\n\t)) ~> sink1"
+		}
+	}
+}
