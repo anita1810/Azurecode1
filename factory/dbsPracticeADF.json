@@ -1,0 +1,9 @@
+{
+	"name": "dbsPracticeADF",
+	"location": "australiasoutheast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5726342a-1882-4473-b308-624f8b6343b4",
+		"tenantId": "6ac054e4-7da6-4843-9cd5-c0cea9426d9e"
+	}
+}
