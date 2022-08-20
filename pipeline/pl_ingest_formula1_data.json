@@ -299,6 +299,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"parameters": {
 			"p_file_date": {
 				"type": "string"
