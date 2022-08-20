@@ -21,7 +21,7 @@
 		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_file_date": {
 			"type": "string",
-			"defaultValue": "@trigger.outputs.windowEndTime()"
+			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -717,7 +717,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "pl_process_formula1_data",

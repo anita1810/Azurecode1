@@ -15,7 +15,7 @@
 			"value": "https://dbsazurepractice.dfs.core.windows.net/"
 		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_file_date": {
-			"value": "@trigger.outputs.windowEndTime()"
+			"value": "@trigger().outputs.windowEndTime"
 		}
 	}
 }
