@@ -1,0 +1,13 @@
+{
+	"name": "ls_databricks_dbs_practice",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-4221756409871569.9.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/e1022931-d0f1-43b6-9a73-a24d1ba9e571/resourceGroups/databricks-course-practice/providers/Microsoft.Databricks/workspaces/dbs-practice",
+			"existingClusterId": "0801-021235-wb2iootd"
+		}
+	}
+}
