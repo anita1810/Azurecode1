@@ -720,7 +720,7 @@
 				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "pl_ingest_formula1_data",
+						"referenceName": "pl_process_formula1_data",
 						"type": "PipelineReference"
 					},
 					"parameters": {
@@ -742,7 +742,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_ingest_formula1_data')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_process_formula1_data')]"
 			]
 		}
 	]
