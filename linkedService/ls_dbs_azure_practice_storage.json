@@ -1,0 +1,12 @@
+{
+	"name": "ls_dbs_azure_practice_storage",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://dbsazurepractice.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEU4NTUzRDBDLTZFOEItNDlFQi05RjMwLUI4M0I5MTg3NTkzN181NTYwOGFjNi02NjMxLTQ4OTUtYTczZC02NTNjOTIwMjYzODQiDQp9"
+		}
+	}
+}
